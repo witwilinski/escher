@@ -1,0 +1,33 @@
+*.csv
+*.log
+.DS_Store
+*.pyc
+.#*
+TAGS
+Escher.egg-info/
+.ipynb_checkpoints/
+lib/
+build/
+_build/
+env/
+commonjs/
+envset/
+node_modules/
+.cache/
+*.tar.gz
+*.whl
+
+# built files
+dist/
+js/src/inline.js
+js/src/coverage/
+py/escher/package.json
+py/escher/static/escher/
+py/escher/static/lib/
+py/escher/static/fonts/
+py/escher/static/jsonschema/
+
+# site files
+1-0-0
+link-site
+.yarnclean
