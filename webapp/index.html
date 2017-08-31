@@ -20,7 +20,7 @@
 
 <div ng-app="escherShow" ng-controller="EscherCtrl">
 
-	<div id="container" style="height:600px"></div>
+	<div id="container" style="width: 100%; height:600px"></div>
     <div id="buttonBar">
     	<input id="file" type="file"> <button type="button" class="btn">Load Map File</button>
     	<button type="button" id="colorScheme" class="btn" ng-class="!defaultColorSchema && 'btn-success'" ng-click="changeColorSchema()">Color Scheme: {{defaultColorSchema ? 'Default' : 'Green'}}</button>
