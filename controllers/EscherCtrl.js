@@ -15,7 +15,13 @@ app.controller("EscherCtrl", function($scope) {
    
    $scope.changeColorSchema = function() {
 	$scope.defaultColorSchema = !$scope.defaultColorSchema;
+	
+	var color = '#334E75'
+	if (!$scope.defaultColorSchema) color = 'greenyellow'
    
+	$('svg.escher-svg .segment').css('stroke', color)
+	$('svg.escher-svg .arrowhead').css('fill', color)
+
    }
    
    d3.json('../data/e_coli_core.Core%20metabolism.json', function(e, data) { 
@@ -32,15 +38,6 @@ app.controller("EscherCtrl", function($scope) {
             // No tooltips
             enable_tooltips: false,
         };
-      var css = "svg.escher-svg .segment { \
-  stroke: #334E75; \
-  stroke-width: 10px; \
-  fill: none; \
-} \
-svg.escher-svg .arrowhead { \
-  fill: #334E75; \
-} \
-"
     escher.Builder(data, null, null, d3.select('#container'), $scope.escher_options);
 	});
 });
