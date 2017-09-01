@@ -78,6 +78,8 @@ app.controller("EscherCtrl", [ '$scope', function($scope) {
 	     });
 	};
 
-   
-	//$scope.init('../data/e_coli_core.Core%20metabolism.json');
+
+	$scope.loadDefaultMap = function() {
+		$scope.init('https://witwilinski.github.io/escher/data/e_coli_core.Core%20metabolism.json');
+	}
 }]);
