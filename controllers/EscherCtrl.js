@@ -2,9 +2,25 @@
 app.controller("EscherCtrl", [ '$scope', function($scope) {
 
 	$scope.defaultColorSchema = true;
-	$scope.nodeStats = {} 
+	//$scope.nodeStats = {} 
 	$scope.calculateStats = function(data) {
 		var stats={}
+		// gene statistics calculation
+		geneStats={}
+		for (var r in data[1].reactions) {
+			var genes = data[1].reactions[r].genes
+			for (var g in genes) {
+				if (!geneStats[genes[g].name])
+					geneStats[genes[g].name]=1
+				else
+					geneStats[genes[g].name]=geneStats[genes[g].name]+1
+			}
+		}
+		for (var sg in geneStats)
+			if (geneStats[sg]<2)
+				delete geneStats[sg]; // remove entries that do not occur at least twice
+		
+		// node statistics calculation
 		for (var n in data[1].nodes) {
 			if (!stats[data[1].nodes[n].node_type])
 				stats[data[1].nodes[n].node_type]=1
@@ -14,6 +30,7 @@ app.controller("EscherCtrl", [ '$scope', function($scope) {
 		
 		$scope.$apply(function() {
 			$scope.nodeStats = stats;
+			$scope.geneStats = geneStats
 		});
 		
 	}
@@ -44,6 +61,7 @@ app.controller("EscherCtrl", [ '$scope', function($scope) {
 	            // No tooltips
 	            enable_tooltips: false,
 	        };
+	   	$('#container').css('height', '600px');
 	    escher.Builder(data, null, null, d3.select('#container'), $scope.escher_options);
 		});
 	}
@@ -55,7 +73,6 @@ app.controller("EscherCtrl", [ '$scope', function($scope) {
 	         var reader = new FileReader();
 	         reader.onload = function(e) {
 	        	 $scope.init(e.target.result);
-	            // handle onload
 	         };
 	         reader.readAsDataURL(file);
 	     });
